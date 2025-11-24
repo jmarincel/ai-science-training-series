@@ -1,0 +1,33 @@
+A batch size of 1024 results in about 33.05 samples/sec, while a batch size of 512 results in 33.22 samples/sec and 2048 in 34.07 samples/sec. It makes sense that a larger batch size results in larger throughput since there is less overhead per sample. I'm not sure why batch size 512 beats 1024. 
+
+bs=512:
+2025-11-13 17:36:47,643 INFO:   Beginning appliance run
+2025-11-13 17:49:39,676 INFO:   | Train Device=CSX, Step=50, Loss=7.81506, Rate=33.33 samples/sec, GlobalRate=33.16 samples/sec, LoopTimeRemaining=0:38:52, TimeRemaining=0:38:52
+2025-11-13 18:02:28,956 INFO:   | Train Device=CSX, Step=100, Loss=6.97130, Rate=33.31 samples/sec, GlobalRate=33.22 samples/sec, LoopTimeRemaining=0:26:03, TimeRemaining=0:26:03
+2025-11-13 18:15:18,070 INFO:   | Train Device=CSX, Step=150, Loss=6.65227, Rate=33.20 samples/sec, GlobalRate=33.24 samples/sec, LoopTimeRemaining=0:13:13, TimeRemaining=0:13:13
+2025-11-13 18:28:07,126 INFO:   | Train Device=CSX, Step=200, Loss=6.32152, Rate=33.28 samples/sec, GlobalRate=33.25 samples/sec, LoopTimeRemaining=0:00:24, TimeRemaining=0:00:24
+2025-11-13 18:28:07,132 INFO:   Saving checkpoint at step 200
+2025-11-13 18:37:32,686 INFO:   Saved checkpoint model_dir_llama2_7b/checkpoint_200.mdl
+2025-11-13 18:37:56,887 INFO:   Training completed successfully!
+2025-11-13 18:37:56,897 INFO:   Processed 102400 training sample(s) in 8046.998824312 seconds.
+
+bs=1024: 
+2025-11-12 20:57:49,696 INFO:   Beginning appliance run
+2025-11-12 21:23:39,991 INFO:   | Train Device=CSX, Step=50, Loss=7.67166, Rate=33.04 samples/sec, GlobalRate=33.03 samples/sec, LoopTimeRemaining=1:18:02, TimeRemaining=1:18:02
+2025-11-12 21:49:27,777 INFO:   | Train Device=CSX, Step=100, Loss=6.99835, Rate=33.10 samples/sec, GlobalRate=33.05 samples/sec, LoopTimeRemaining=0:52:14, TimeRemaining=0:52:14
+2025-11-12 22:15:15,581 INFO:   | Train Device=CSX, Step=150, Loss=6.54189, Rate=33.09 samples/sec, GlobalRate=33.06 samples/sec, LoopTimeRemaining=0:26:27, TimeRemaining=0:26:27
+2025-11-12 22:41:03,347 INFO:   | Train Device=CSX, Step=200, Loss=6.10848, Rate=33.12 samples/sec, GlobalRate=33.07 samples/sec, LoopTimeRemaining=0:00:39, TimeRemaining=0:00:39
+2025-11-12 22:41:03,353 INFO:   Saving checkpoint at step 200
+2025-11-12 22:50:59,885 INFO:   Saved checkpoint model_dir_llama2_7b/checkpoint_200.mdl
+2025-11-12 22:51:30,824 INFO:   Training completed successfully!
+2025-11-12 22:51:30,831 INFO:   Processed 204800 training sample(s) in 7305.622918278 seconds.
+
+bs=2048: 
+2025-11-14 22:52:56,337 INFO:   Beginning appliance run
+2025-11-14 23:43:02,542 INFO:   | Train Device=CSX, Step=50, Loss=7.76567, Rate=34.07 samples/sec, GlobalRate=34.06 samples/sec, LoopTimeRemaining=2:31:19, TimeRemaining=2:31:19
+
+2025-11-15 15:35:29,254 INFO:   Beginning appliance run
+2025-11-15 16:25:34,666 INFO:   | Train Device=CSX, Step=50, Loss=7.76567, Rate=34.10 samples/sec, GlobalRate=34.07 samples/sec, LoopTimeRemaining=2:31:17, TimeRemaining=2:31:17
+
+2025-11-16 17:53:50,012 INFO:   Beginning appliance run
+2025-11-16 18:43:55,336 INFO:   | Train Device=CSX, Step=50, Loss=7.76567, Rate=34.07 samples/sec, GlobalRate=34.07 samples/sec, LoopTimeRemaining=2:31:16, TimeRemaining=2:31:16

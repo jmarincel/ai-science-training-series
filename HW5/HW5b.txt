@@ -1,0 +1,1 @@
+I wasn't able to submit a batch since I could not write to /eagle/argonne_tpc/. Instead I submitted the same job to each endpoint 20 times and recorded how much time it took. I found that metis consistently outperformed sophia. This could be because sophia hosts so many "instruct" models and may receive more requests; however, these are completely different architectures. 
