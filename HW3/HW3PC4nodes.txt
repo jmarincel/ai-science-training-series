@@ -1,0 +1,21 @@
+Running with DragonHPC
+Dragon running on 4 nodes
+['x3007c0s7b0n0', 'x3007c0s7b1n0', 'x3007c0s37b1n0', 'x3007c0s37b0n0']
+
+Started DDict on 4 nodes with 603.8 GB of memory
+
+Launching 256 simulations on 128 workers to generate training data of size 5.00 GB ...
+Done in 12.38 seconds
+IO time: 0.134 seconds
+
+Launching 16 CNN models to train on the simulaiton data ...
+Done in 132.02 seconds
+IO time: 1.534 seconds
+
+
+Running with Parsl tranfering data through futures (last since it will take longer)
+Launching 256 simulations on 128 workers to generate training data of size 5.00 GB ...
+Done in 21.28 seconds
+
+Launching 16 CNN models to train on the simulaiton data ...
+Done in 847.69 seconds

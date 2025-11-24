@@ -1,0 +1,19 @@
+It appears that number of layers can be anything, but that tensor parallel degree has to divide 4, as asserted in fsdp_tp.py:
+
+assert world_size % args.tp == 0, "WORLD_SIZE must be divisible by TP"
+
+where each node has 4 GPUs available. This makes sense since world_size / args.tp is the data parallel degree, which should be an integer to avoid wasting GPUs. 
+Enabling tensor parallel results in speedups: 
+
+ezpz-launch python3 -m ezpz.examples.fsdp_tp --dataset random --tp=4 --n-layers=8
+Executing finished in 110.06 seconds.
+
+ezpz-launch python3 -m ezpz.examples.fsdp_tp --dataset random --tp=2 --n-layers=8
+Executing finished in 120.22 seconds.
+
+ezpz-launch python3 -m ezpz.examples.fsdp_tp --dataset random --tp=1 --n-layers=8
+Executing finished in 121.46 seconds.
+
+Apparently it is faster to have each GPU compute part of each layer for all of the data instead of dividing the data across multiple GPUs, each of which computes the entirety of each layer.
+I find this surprising, since tensor parallelism involves communication after each layer while data parallelism involves communication only after each pass through the network. 
+Might not pipeline parallelism be even faster, since it involves communication only after every few layers? 

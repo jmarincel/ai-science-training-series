@@ -1,0 +1,44 @@
+environment: line 5: __conda_exe: command not found
+
+EnvironmentLocationNotFound: Not a conda environment: /eagle/datascience/balin/AI4S/_ai4s_simAI
+
+Running producer-consumer scripts
+with 64 simulations of 512 x 512 grid
+
+Let's do a warmup run first with the Parsl + file system implementation (DISCARD THIS DATA)
+Launching 64 simulations on 32 workers to generate training data of size 1.25 GB ...
+Done in 16.50 seconds
+IO time: 0.106 seconds
+
+Launching 4 CNN models to train on the simulaiton data ...
+Done in 74.90 seconds
+IO time: 0.520 seconds
+
+
+Running with Parsl writing to the file system
+Launching 64 simulations on 32 workers to generate training data of size 1.25 GB ...
+Done in 16.44 seconds
+IO time: 0.099 seconds
+
+Launching 4 CNN models to train on the simulaiton data ...
+Done in 16.47 seconds
+IO time: 0.534 seconds
+
+
+Running with DragonHPC
+Dragon running on 1 nodes
+['x3006c0s25b0n0']
+
+Started DDict on 1 nodes with 151.0 GB of memory
+
+Launching 64 simulations on 32 workers to generate training data of size 1.25 GB ...
+Done in 11.89 seconds
+IO time: 0.124 seconds
+
+Launching 4 CNN models to train on the simulaiton data ...
+Done in 31.57 seconds
+IO time: 1.352 seconds
+
+
+Running with Parsl tranfering data through futures (last since it will take longer)
+Launching 64 simulations on 32 workers to generate training data of size 1.25 GB ...
