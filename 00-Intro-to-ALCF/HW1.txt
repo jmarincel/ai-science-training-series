@@ -1,0 +1,13 @@
+I set NRANKS_PER_NODE = 1 in run_ddp_pytorch_2p8_N1_R4.sh to test the 1 GPU code on Polaris. The result was total train time: 17.59s. This contrasts with total train time: 4.65s for 1 node with 4 GPUs. 
+
+I requested a 2 node job on Polaris and ran with NRANKS_PER_NODE=2. The result was total train time: 12.79s. So faster than running on 1 GPU, but slower than using only one node with 2 GPUs, which gave total train time: 9.38s. 
+
+To try to understand this, I looked at the json logs in Perfetto. For 4 GPUs on the same node, the allreduce steps took from 10s to 100s of microseconds. For 4 GPUs spread across 2 nodes, the allreduces took from milliseconds to 10s of milliseconds. 
+
+Now I look at the src and tgt tensors. Changing batch from 2048 to 1024 results in total train time: 2.39s; changing it to 4096 results in total train time: 9.07s. So the training time is linear in number of batches. Changing feature number from 512 to 1024 gives total train time: 6.43s, changing it to 4096 gives 74.21s. So training times increases faster than linearly in number of features. Increasing features by another factor of 2 results in an out of memory error. 
+
+Finally, I look at sequence length. Increasing sequence length of source from 1 to 10 and target from 20 to 200 gives total train time: 55.63s, more than 10 times increase in runtime. Setting source to 100 and target to 2000 gives total train time: 162.83s, only a factor of 3 increase. It is difficult to see what is going on here; increasing target by another order of magnitude requires too much memory. 
+
+Setting source to 1 and target to 2000 gives total train time: 151.16s. Setting source to 10 and target to 2000 gives total train time: 155.37s. Setting source to 1 and target to 200 gives total train time: 47.50s. Source length has little effect on training time as long as it is significantly smaller than target length. 
+
+Setting both source and target to 20 gives total train time: 4.75s. Increasing both to 200 results in total train time: 77.94s. Increasing both to 2000 gives total train time: 342.88s. Comparing to earlier results, it seems that increasing the source sequence length has a greater effect the larger is the target sequence length. 
